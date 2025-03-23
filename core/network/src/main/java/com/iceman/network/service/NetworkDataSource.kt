@@ -7,7 +7,7 @@ interface NetworkDataSource {
 
     suspend fun calculateNewMath(
         newMathRequest: MathRequest,
-        callback: (code: Boolean, error: String?) -> Unit
+        callback: (code: Boolean, result: String? ,error: String?) -> Unit
     )
 
     suspend fun getMathList(): List<CalculateMathResponse>

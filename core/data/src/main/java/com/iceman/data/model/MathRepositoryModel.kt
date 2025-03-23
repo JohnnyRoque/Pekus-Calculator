@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface MathRepositoryModel {
 
     suspend fun calculateNewMath(
-        insertNewMathRequest: MathRequest, callback: (code: Boolean, error: String?) -> Unit
+        insertNewMathRequest: MathRequest, callback: (code: Boolean,  result: String?,error: String?) -> Unit
     )
 
     suspend fun getMathList(): Flow<List<CalculateMathResponse>>

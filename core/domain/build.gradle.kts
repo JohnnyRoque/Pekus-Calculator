@@ -36,6 +36,7 @@ dependencies {
     api(project(":core:data"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+
     //Koin
     implementation(libs.io.insert.koin.androidx.compose)
     implementation(platform(libs.io.insert.koin.bom))

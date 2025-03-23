@@ -11,5 +11,5 @@ data class MathRequest(
     @SerialName("valorB") val valorB : Double,
     @SerialName("operacao") val operation : String?,
     @SerialName("resultado") val result : Double,
-    @SerialName("dataCalculo") val date : String,
+    @SerialName("dataCalculo") val date : String = "",
     )

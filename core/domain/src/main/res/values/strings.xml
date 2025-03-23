@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_text">Soma</string>
+    <string name="subtraction_text">Subtração</string>
+    <string name="multiply_text">Multiplicação</string>
+    <string name="division_text">Divisão</string>
+</resources>

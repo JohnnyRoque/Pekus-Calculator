@@ -21,10 +21,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "Pekus Calculator"
 include(":app")
-include(":core:database")
 include(":core:network")
 include(":core:domain")
-include(":core:model")
 include(":core:ui")
 include(":feature:calculator")
 include(":feature:chart")

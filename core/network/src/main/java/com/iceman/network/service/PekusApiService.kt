@@ -19,7 +19,7 @@ private const val BASE_URL = "https://intranet.pekus.com.br/calcapi/"
 interface PekusApiService {
 
     @POST("api/Calculadora")
-    suspend fun calculateNewMath(@Body insertNewMathRequest: MathRequest): Response<Unit>
+    suspend fun calculateNewMath(@Body insertNewMathRequest: MathRequest): Response<Int>
 
     @GET("api/Calculadora")
     suspend fun getMathList(): List<CalculateMathResponse>
@@ -44,16 +44,19 @@ internal class PekusCalApiImpl(client: OkHttpClient) : NetworkDataSource {
 
     override suspend fun calculateNewMath(
         newMathRequest: MathRequest,
-        callback: (code: Boolean, error: String?) -> Unit
+        callback: (code: Boolean, result: String?, error: String?) -> Unit
     ) {
         try {
-            if (networkApi.calculateNewMath(newMathRequest).isSuccessful) {
-                callback(true, null)
-            } else {
-                callback(false, null)
+            networkApi.calculateNewMath(newMathRequest).apply {
+
+                if (isSuccessful) {
+                    callback(true, this.body().toString(),null)
+                } else {
+                    callback(false, null, null)
+                }
             }
         } catch (e: Exception) {
-            callback(false, e.localizedMessage)
+            callback(false, null, e.localizedMessage)
         }
     }
 
