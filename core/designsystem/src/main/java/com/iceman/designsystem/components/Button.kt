@@ -32,8 +32,7 @@ fun PekusButton(
 ) {
     var clickCount by remember { mutableIntStateOf(0) }
     val onButtonClick = debounce<Unit> { clickCount++ }
-    Button(
-        { onButtonClick(onClick()) },
+    Button(onClick = onClick,
         enabled = enabled,
         modifier = modifier,
         shape = RoundedCornerShape(8.dp),

@@ -1,5 +1,8 @@
 package com.iceman.calculator
 
+import android.R.attr.enabled
+import android.R.attr.onClick
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -21,56 +24,91 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.text.isDigitsOnly
+import com.iceman.calculator.util.CalculatorScreenCommand
 import com.iceman.calculator.util.CalculatorScreenCommand.SuccessAlert
 import com.iceman.designsystem.components.PekusButton
+import com.iceman.designsystem.components.PekusTextButton
 import com.iceman.ui.components.ArithmeticsButtons
 import com.iceman.ui.components.ValuesTextFieldRow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CalculatorScreen(modifier: Modifier = Modifier, viewModel: CalculatorViewModel) {
+fun CalculatorScreen(
+    modifier: Modifier = Modifier, viewModel: CalculatorViewModel, onClickNav: () -> Unit
+) {
     val context = LocalContext.current
     val mathValues by viewModel.mathValues.collectAsState()
     val screenCommand by viewModel.command.collectAsState()
-    var openDialog by remember { mutableStateOf(true) }
+    val selectedArithmetic by viewModel.selectedArithmetic.collectAsState()
+    val isButtonEnable by viewModel.isButtonEnabled.collectAsState()
 
     Column(modifier.fillMaxSize()) {
 
-        ValuesTextFieldRow(userTexts = mathValues, onValueOneChange = {}) { }
-        ArithmeticsButtons { viewModel.selectArithmetic(it) }
+        ValuesTextFieldRow(
+            userTexts = mathValues,
+            onValueOneChange = { viewModel.updateMathValue(it, true) },
+            onValueTwoChange = { viewModel.updateMathValue(it, false) })
+
+        ArithmeticsButtons(selectedArithmetic = selectedArithmetic) { viewModel.selectArithmetic(it) }
 
         PekusButton(
-            text = "Confirmar",
-            enabled =  (mathValues.first.text.isNotEmpty() && mathValues.second.text.isNotEmpty()),
-            onClick = {viewModel.calculateValues(valueA = mathValues.first.text.toDouble(), valueB = mathValues.second.text.toDouble(), arithmetic = viewModel.selectedArithmetic )}
+            text = stringResource(R.string.confirm_text),
+            enabled = isButtonEnable ,
+            onClick = {
+                viewModel.calculateValues(
+                    valueA = mathValues.first.text.toDouble(),
+                    valueB = mathValues.second.text.toDouble(),
+                    arithmetic = checkNotNull(selectedArithmetic)
+                )
+            }
+        )
+        PekusTextButton(
+            stringResource(R.string.history_text),
+            onClick = onClickNav
         )
 
-        if (screenCommand is SuccessAlert) {
-            if (openDialog) {
-                BasicAlertDialog(onDismissRequest = { openDialog = false }) {
-                    Surface(
-                        modifier = Modifier.wrapContentWidth().wrapContentHeight(),
-                        shape = MaterialTheme.shapes.large,
-                        tonalElevation = AlertDialogDefaults.TonalElevation
-                    ) {
-                        Column(modifier = Modifier.padding(16.dp)) {
-                            Text("Dados armazenados com sucesso, ID de Armazenamento ${(screenCommand as SuccessAlert).message}")
-                            Spacer(modifier = Modifier.height(24.dp))
-                            TextButton(onClick = {
-                                openDialog = false
-                            }, modifier = Modifier.align(Alignment.End)) { Text("Confirm") }
-                        }
+        when (screenCommand) {
+            is SuccessAlert -> {
+                if (viewModel.openDialog) {
+                    BasicAlertDialog(onDismissRequest = { viewModel.clearValues() }) {
+                        Surface(
+                            modifier = Modifier
+                                .wrapContentWidth()
+                                .wrapContentHeight(),
+                            shape = MaterialTheme.shapes.large,
+                            tonalElevation = AlertDialogDefaults.TonalElevation
+                        ) {
+                            Column(modifier = Modifier.padding(16.dp)) {
+                                Text(
+                                    stringResource(
+                                        R.string.success_message,
+                                        (screenCommand as SuccessAlert).message
+                                    )
+                                )
+                                Spacer(modifier = Modifier.height(24.dp))
+                                TextButton(
+                                    onClick = { viewModel.clearValues() },
+                                    modifier = Modifier.align(Alignment.End)
+                                ) { Text(stringResource(R.string.confirm_text)) }
+                            }
 
+                        }
                     }
                 }
-            } else {
+            }
+            is CalculatorScreenCommand.FailureAlert -> {
                 Toast.makeText(
                     context,
-                    "Houve um erro inesperado, tente novamente.",
+                    stringResource(R.string.error_message),
                     Toast.LENGTH_SHORT
                 ).show()
+                viewModel.clearValues()
+
             }
+            is CalculatorScreenCommand.Idle -> {}
         }
     }
 }

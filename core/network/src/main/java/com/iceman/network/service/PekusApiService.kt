@@ -1,10 +1,12 @@
 package com.iceman.network.service
 
+import com.iceman.network.interceptor.PekusCalInterceptor
 import com.iceman.network.request.MathRequest
 import com.iceman.network.response.CalculateMathResponse
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -31,9 +33,17 @@ interface PekusApiService {
     suspend fun clearMathList(): Response<Unit>
 }
 
-internal class PekusCalApiImpl(client: OkHttpClient) : NetworkDataSource {
-    val contentType = "application/json".toMediaType()
+internal class PekusCalApiImpl() : NetworkDataSource {
+    val loggingInterceptor = HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.BODY // Or HEADERS, BASIC, NONE
+    }
+    val client = OkHttpClient.Builder()
+        .addInterceptor(loggingInterceptor)
+        .addInterceptor(PekusCalInterceptor(false))
+        .build()
 
+
+    val contentType = "application/json".toMediaType()
     val json = Json { ignoreUnknownKeys = true }
 
     private val networkApi = Retrofit.Builder().apply {
@@ -46,11 +56,12 @@ internal class PekusCalApiImpl(client: OkHttpClient) : NetworkDataSource {
         newMathRequest: MathRequest,
         callback: (code: Boolean, result: String?, error: String?) -> Unit
     ) {
+
         try {
             networkApi.calculateNewMath(newMathRequest).apply {
 
                 if (isSuccessful) {
-                    callback(true, this.body().toString(),null)
+                    callback(true, this.body().toString(), null)
                 } else {
                     callback(false, null, null)
                 }

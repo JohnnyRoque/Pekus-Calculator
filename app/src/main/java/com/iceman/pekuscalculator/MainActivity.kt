@@ -21,8 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PekusCalculatorTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    PCApp(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }

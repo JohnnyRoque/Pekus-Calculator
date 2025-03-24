@@ -41,12 +41,17 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":feature:calculator"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.androidx.navigation.compose)
+    //Koin
+    implementation(libs.io.insert.koin.androidx.compose)
+    implementation(platform(libs.io.insert.koin.bom))
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)

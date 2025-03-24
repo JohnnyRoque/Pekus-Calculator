@@ -35,12 +35,12 @@ fun ShopperTextField(
     keyboardOption: KeyboardOptions,
     onTextChange: (TextFieldValue) -> Unit
 ) {
-    val hasNonNumeric = userText.text.any { !it.isDigit() }
+    val hasNumeric = userText.text.any { !it.isDigit() }
 
     Column(modifier) {
         TextField(
             keyboardOptions = keyboardOption.copy(keyboardType = KeyboardType.Number,imeAction = ImeAction.Next),
-            isError =  userText.text.isEmpty() || hasNonNumeric,
+            isError =  hasNumeric,
             modifier = Modifier,
             onValueChange = { onTextChange(it) },
             colors = TextFieldDefaults.colors(

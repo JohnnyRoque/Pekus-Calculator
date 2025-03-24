@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 fun PekusIconButton(
     modifier: Modifier = Modifier,
     icon: Int,
+    color: Color,
     contentDescription: Int,
     onClick: () -> Unit
 ) {
@@ -29,7 +30,7 @@ fun PekusIconButton(
             .clip(RoundedCornerShape(16.dp))
             .clickable(true, onClick = onClick),
 
-        color = Color.LightGray
+        color = color
     ) {
         Box(contentAlignment = Alignment.Center) {
             Icon(

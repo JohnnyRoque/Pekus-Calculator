@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Pekus Calculator</string>
+    <string name="back_button">Voltar\n</string>
 </resources>

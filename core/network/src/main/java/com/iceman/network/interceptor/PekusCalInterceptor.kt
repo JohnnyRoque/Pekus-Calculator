@@ -1,5 +1,6 @@
 package com.iceman.network.interceptor
 
+import android.util.Log
 import com.iceman.network.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Interceptor.Chain
@@ -13,6 +14,7 @@ class PekusCalInterceptor(private val disableRetry: Boolean) : Interceptor {
         if (disableRetry) {
             return response
         }
+
         var attempt = 0
         while (response.code == CODE_TIMEOUT && attempt < MAX_RETRY) {
             attempt++
@@ -27,10 +29,12 @@ class PekusCalInterceptor(private val disableRetry: Boolean) : Interceptor {
             val originalRequest = chain.request()
             val originalUrl = originalRequest.url
 
+
             // Add API key as a query parameter
             val newUrl = originalUrl.newBuilder()
                 .addQueryParameter("apikey", BuildConfig.API_KEY)
                 .build()
+            println("Modified URL: $newUrl")
 
             // Build new request with modified URL
             val newRequest = originalRequest.newBuilder()

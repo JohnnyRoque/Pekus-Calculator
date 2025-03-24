@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="confirm_text">Confirmar</string>
+    <string name="success_message">Dados armazenados com sucesso, ID de Armazenamento %1$s</string>
+    <string name="error_message">Houve um erro inesperado, tente novamente.</string>
+    <string name="history_text">Histórico</string>
+</resources>
