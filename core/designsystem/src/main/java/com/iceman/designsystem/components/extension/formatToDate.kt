@@ -1,8 +1,6 @@
 package com.iceman.designsystem.components.extension
 
-import android.R.id.input
 import java.time.LocalDateTime
-import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
 fun String.formatToDate(): String {

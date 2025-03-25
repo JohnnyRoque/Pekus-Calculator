@@ -8,13 +8,9 @@ import com.iceman.domain.usecase.ClearMathListUseCase
 import com.iceman.domain.usecase.DeleteMathUseCase
 import com.iceman.domain.usecase.GetMathChartUseCase
 import com.iceman.network.response.CalculateMathResponse
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 class MathChartViewModel(

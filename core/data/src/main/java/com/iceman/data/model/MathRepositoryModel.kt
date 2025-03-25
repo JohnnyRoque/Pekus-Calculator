@@ -2,7 +2,6 @@ package com.iceman.data.model
 
 import com.iceman.network.request.MathRequest
 import com.iceman.network.response.CalculateMathResponse
-import kotlinx.coroutines.flow.Flow
 
 
 interface MathRepositoryModel {
