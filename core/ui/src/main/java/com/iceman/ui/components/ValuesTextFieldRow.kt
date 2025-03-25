@@ -1,25 +1,16 @@
 package com.iceman.ui.components
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.iceman.designsystem.components.ShopperTextField
 
 @Composable
@@ -39,7 +30,7 @@ fun ValuesTextFieldRow(
                 onTextChange = onValueOneChange
             )
 
-            Spacer(Modifier.weight(1f))
+            Spacer(Modifier.weight(0.5f))
 
         ShopperTextField(
             modifier = Modifier.weight(1f),

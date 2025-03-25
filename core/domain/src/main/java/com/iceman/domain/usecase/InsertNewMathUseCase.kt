@@ -1,6 +1,5 @@
 package com.iceman.domain.usecase
 
-import com.iceman.data.extension.makeNewMathRequest
 import com.iceman.data.repository.MathRepository
 import com.iceman.network.request.MathRequest
 

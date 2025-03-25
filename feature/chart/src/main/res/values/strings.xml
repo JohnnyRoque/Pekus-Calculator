@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="id_text">id</string>
+    <string name="operation_text">Operação</string>
+    <string name="valor_a_text">Valor A</string>
+    <string name="valor_b_text">Valor B</string>
+    <string name="result_text">Resultado</string>
+    <string name="data_text">Data</string>
+</resources>

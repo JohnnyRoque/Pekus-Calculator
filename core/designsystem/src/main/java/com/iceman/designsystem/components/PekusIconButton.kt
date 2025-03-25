@@ -1,5 +1,6 @@
 package com.iceman.designsystem.components
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -26,7 +27,7 @@ fun PekusIconButton(
 
     Surface(
         shape = RoundedCornerShape(16.dp), // Adjust corner radius
-        modifier = modifier
+        modifier = modifier.border(1.dp,Color.Black.copy(0.2f) ,RoundedCornerShape(16.dp))
             .clip(RoundedCornerShape(16.dp))
             .clickable(true, onClick = onClick),
 

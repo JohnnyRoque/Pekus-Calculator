@@ -1,7 +1,5 @@
 package com.iceman.pekuscalculator
 
-import android.R.attr.name
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -10,18 +8,14 @@ import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -29,10 +23,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.iceman.calculator.CalculatorScreen
-import com.iceman.calculator.CalculatorViewModel
+import com.iceman.chart.MathChartScreen
 import com.iceman.pekuscalculator.navigation.PCScreens
 import org.koin.androidx.compose.koinViewModel
-import org.koin.compose.koinInject
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -85,10 +78,13 @@ fun PCApp(
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(PCScreens.Calculator.name) {
-                CalculatorScreen(viewModel = koinViewModel() ) {
+                CalculatorScreen(viewModel = koinViewModel()) {
                     navController.navigate((PCScreens.History.name))
 
                 }
+            }
+            composable(PCScreens.History.name) {
+                MathChartScreen(onclick = {}, viewModel = koinViewModel())
             }
         }
     }

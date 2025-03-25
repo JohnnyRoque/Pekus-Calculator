@@ -2,6 +2,7 @@ package com.iceman.pekuscalculator.application
 
 import android.app.Application
 import com.iceman.calculator.di.featureCalculatorModule
+import com.iceman.chart.di.chartModule
 import com.iceman.data.di.dataModule
 import com.iceman.domain.di.domainModule
 import com.iceman.network.di.networkModule
@@ -19,7 +20,8 @@ class PCApplication : Application() {
                 networkModule,
                 dataModule,
                 domainModule,
-                featureCalculatorModule
+                featureCalculatorModule,
+                chartModule
             )
         }
     }

@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.test
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -35,6 +37,10 @@ android {
 }
 
 dependencies {
+    api(project(":core:ui"))
+    api(project(":core:domain"))
+    api(project(":core:designsystem"))
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

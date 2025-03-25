@@ -1,6 +1,5 @@
 package com.iceman.data.repository
 
-import com.iceman.data.extension.makeNewMathRequest
 import com.iceman.data.model.MathRepositoryModel
 import com.iceman.network.request.MathRequest
 import com.iceman.network.response.CalculateMathResponse
@@ -9,8 +8,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class MathRepository(private val networkDataSource: NetworkDataSource) : MathRepositoryModel {
-
-
 
     override suspend fun calculateNewMath(
         insertNewMathRequest: MathRequest,
@@ -26,7 +23,7 @@ class MathRepository(private val networkDataSource: NetworkDataSource) : MathRep
 
     }
 
-    override suspend fun getMathList(): Flow<List<CalculateMathResponse>> = flow {
+    override fun getMathList(): Flow<List<CalculateMathResponse>> = flow {
         emit(
             networkDataSource.getMathList()
         )

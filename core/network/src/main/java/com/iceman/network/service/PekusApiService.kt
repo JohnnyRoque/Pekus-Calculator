@@ -3,6 +3,8 @@ package com.iceman.network.service
 import com.iceman.network.interceptor.PekusCalInterceptor
 import com.iceman.network.request.MathRequest
 import com.iceman.network.response.CalculateMathResponse
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient

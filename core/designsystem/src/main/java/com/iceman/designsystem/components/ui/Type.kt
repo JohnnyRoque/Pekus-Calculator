@@ -1,4 +1,5 @@
-package com.iceman.pekuscalculator.ui.theme
+package com.iceman.designsystem.components.ui
+
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

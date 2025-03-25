@@ -4,11 +4,14 @@ import android.R.attr.enabled
 import android.R.attr.onClick
 import android.util.Log
 import android.widget.Toast
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.AlertDialogDefaults
@@ -26,7 +29,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.core.text.isDigitsOnly
 import com.iceman.calculator.util.CalculatorScreenCommand
 import com.iceman.calculator.util.CalculatorScreenCommand.SuccessAlert
 import com.iceman.designsystem.components.PekusButton
@@ -45,14 +47,16 @@ fun CalculatorScreen(
     val selectedArithmetic by viewModel.selectedArithmetic.collectAsState()
     val isButtonEnable by viewModel.isButtonEnabled.collectAsState()
 
-    Column(modifier.fillMaxSize()) {
+    Column(modifier.fillMaxSize().padding(16.dp).background(MaterialTheme.colorScheme.background), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
 
         ValuesTextFieldRow(
             userTexts = mathValues,
             onValueOneChange = { viewModel.updateMathValue(it, true) },
             onValueTwoChange = { viewModel.updateMathValue(it, false) })
 
-        ArithmeticsButtons(selectedArithmetic = selectedArithmetic) { viewModel.selectArithmetic(it) }
+        ArithmeticsButtons(selectedArithmetic = selectedArithmetic, modifier = Modifier.padding(16.dp)) { viewModel.selectArithmetic(it) }
+
+        Spacer(Modifier.size(24.dp))
 
         PekusButton(
             text = stringResource(R.string.confirm_text),
@@ -65,6 +69,8 @@ fun CalculatorScreen(
                 )
             }
         )
+        Spacer(Modifier.size(24.dp))
+
         PekusTextButton(
             stringResource(R.string.history_text),
             onClick = onClickNav
