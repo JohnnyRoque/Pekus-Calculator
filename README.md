@@ -31,9 +31,9 @@ Implementação de Casos de Uso: Os casos de uso, como ClearMathListUseCase, Del
 
 O Pekus Calculator é um aplicativo projetado para  realizar operações aritiméticas onde os dados são armazenados em servidor. 
 
-![image](https://github.com/user-attachments/assets/084a376b-de04-4739-b2d6-4a561aaa3362)
-![image](https://github.com/user-attachments/assets/dafd9c4d-2937-4be4-ad92-578810de13ff)
-![image](https://github.com/user-attachments/assets/37b3bda3-7ece-402e-830e-a67144b158bb)
+<img src="https://github.com/user-attachments/assets/084a376b-de04-4739-b2d6-4a561aaa3362" width="45%" />
+<img src="https://github.com/user-attachments/assets/dafd9c4d-2937-4be4-ad92-578810de13ff" width="45%" />
+<img src="https://github.com/user-attachments/assets/37b3bda3-7ece-402e-830e-a67144b158bb" width="45%" />
 
 
 
