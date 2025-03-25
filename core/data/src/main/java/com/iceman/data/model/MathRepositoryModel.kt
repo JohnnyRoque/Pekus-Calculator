@@ -11,7 +11,7 @@ interface MathRepositoryModel {
         insertNewMathRequest: MathRequest, callback: (code: Boolean,  result: String?,error: String?) -> Unit
     )
 
-     fun getMathList(): Flow<List<CalculateMathResponse>>
+  suspend   fun getMathList(): List<CalculateMathResponse>
 
     suspend fun deleteMathCal(
         id: Int, callback: (code: Boolean, error: String?) -> Unit

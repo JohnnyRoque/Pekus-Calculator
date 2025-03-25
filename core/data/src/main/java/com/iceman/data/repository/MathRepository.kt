@@ -23,11 +23,9 @@ class MathRepository(private val networkDataSource: NetworkDataSource) : MathRep
 
     }
 
-    override fun getMathList(): Flow<List<CalculateMathResponse>> = flow {
-        emit(
-            networkDataSource.getMathList()
-        )
-    }
+    override suspend fun getMathList(): List<CalculateMathResponse> = networkDataSource.getMathList()
+
+
 
 
     override suspend fun deleteMathCal(

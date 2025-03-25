@@ -8,6 +8,8 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import okhttp3.WebSocket
+import okhttp3.WebSocketListener
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -31,7 +33,7 @@ interface PekusApiService {
     @DELETE("api/Calculadora")
     suspend fun deleteMathCal(@Query("id") id: Int): Response<Unit>
 
-    @GET("api/Calculadora")
+    @GET("api/Calculadora/LimpaContas")
     suspend fun clearMathList(): Response<Unit>
 }
 

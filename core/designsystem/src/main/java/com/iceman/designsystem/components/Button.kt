@@ -30,14 +30,12 @@ fun PekusButton(
     onClick: () -> Unit
 
 ) {
-    var clickCount by remember { mutableIntStateOf(0) }
-    val onButtonClick = debounce<Unit> { clickCount++ }
     Button(onClick = onClick,
         enabled = enabled,
         modifier = modifier,
         shape = RoundedCornerShape(8.dp),
         colors = ButtonDefaults.buttonColors()
-            .copy(containerColor = MaterialTheme.colorScheme.primaryContainer)
+            .copy(containerColor = MaterialTheme.colorScheme.primaryContainer, contentColor = MaterialTheme.colorScheme.onPrimaryContainer)
     )
     {
         Text(
